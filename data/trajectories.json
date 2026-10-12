@@ -1,0 +1,764 @@
+{
+  "note": "SYNTHETIC DATA. Fictional R&D reports (RPT-xxxx) and hand-written agent runs, made up to exercise step-level judging. No real documents, people or measurements.",
+  "queries": [
+    {
+      "qid": "q1",
+      "query": "Which cathode coatings reduced capacity fade in NMC811 cells cycled at 45 C since 2022, and by how much?",
+      "trajectories": [
+        {
+          "agent": "single-agent",
+          "steps": [
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "NMC811 cathode coating capacity fade 45 C since 2022"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0412",
+                    "text": "2023 cell study. Al2O3 ALD coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 18% to 11%."
+                  },
+                  {
+                    "id": "RPT-0388",
+                    "text": "2022 cell study. LiNbO3 coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 17% to 13%."
+                  },
+                  {
+                    "id": "RPT-0197",
+                    "text": "2019 cell study. Al2O3 coating on NMC622 cathodes cycled at 25 C. Capacity fade after 300 cycles fell from 9% to 7%."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Two coatings qualify. Al2O3 ALD cut NMC811 capacity fade after 500 cycles at 45 C from 18% to 11% [RPT-0412], and LiNbO3 cut it from 17% to 13% [RPT-0388].",
+              "citations": [
+                "RPT-0412",
+                "RPT-0388"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "literature-agent",
+              "message": "Find cathode coatings that reduced capacity fade in NMC811 cells cycled at 45 C, reports from 2022 onwards. Return fade numbers with report IDs.",
+              "result": {
+                "text": "Two matches: RPT-0412 (Al2O3 ALD) and RPT-0388 (LiNbO3).",
+                "docs": [
+                  {
+                    "id": "RPT-0412",
+                    "text": "2023 cell study. Al2O3 ALD coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 18% to 11%."
+                  },
+                  {
+                    "id": "RPT-0388",
+                    "text": "2022 cell study. LiNbO3 coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 17% to 13%."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Two coatings qualify. Al2O3 ALD cut NMC811 capacity fade after 500 cycles at 45 C from 18% to 11% [RPT-0412], and LiNbO3 cut it from 17% to 13% [RPT-0388].",
+              "citations": [
+                "RPT-0412",
+                "RPT-0388"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-compact",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "literature-agent",
+              "message": "Find cathode coatings that reduce capacity fade.",
+              "result": {
+                "text": "Three coating studies found.",
+                "docs": [
+                  {
+                    "id": "RPT-0197",
+                    "text": "2019 cell study. Al2O3 coating on NMC622 cathodes cycled at 25 C. Capacity fade after 300 cycles fell from 9% to 7%."
+                  },
+                  {
+                    "id": "RPT-0412",
+                    "text": "2023 cell study. Al2O3 ALD coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 18% to 11%."
+                  },
+                  {
+                    "id": "RPT-0388",
+                    "text": "2022 cell study. LiNbO3 coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 17% to 13%."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Two coatings qualify. Al2O3 ALD cut NMC811 capacity fade after 500 cycles at 45 C from 18% to 11% [RPT-0412], and LiNbO3 cut it from 17% to 13% [RPT-0388].",
+              "citations": [
+                "RPT-0412",
+                "RPT-0388"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-memory",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "literature-agent",
+              "message": "Find cathode coatings that reduced capacity fade in NMC811 cells cycled at 45 C, reports from 2022 onwards. Return fade numbers with report IDs.",
+              "result": {
+                "text": "Two matches: RPT-0412 (Al2O3 ALD) and RPT-0388 (LiNbO3).",
+                "docs": [
+                  {
+                    "id": "RPT-0412",
+                    "text": "2023 cell study. Al2O3 ALD coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 18% to 11%."
+                  },
+                  {
+                    "id": "RPT-0388",
+                    "text": "2022 cell study. LiNbO3 coating on NMC811 cathodes cycled at 45 C. Capacity fade after 500 cycles fell from 17% to 13%."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "memory_write",
+              "key": "coatings.al2o3.nmc811_fade_45c",
+              "value": "Al2O3 ALD cuts NMC811 fade at 45 C from 18% to 9% after 500 cycles",
+              "scope": "project",
+              "confirmed": false
+            },
+            {
+              "type": "final_answer",
+              "text": "Two coatings qualify. Al2O3 ALD cut NMC811 capacity fade after 500 cycles at 45 C from 18% to 11% [RPT-0412], and LiNbO3 cut it from 17% to 13% [RPT-0388].",
+              "citations": [
+                "RPT-0412",
+                "RPT-0388"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "qid": "q2",
+      "query": "What do our 2024 pilot-line reports say about slurry viscosity drift during the 12-hour runs?",
+      "trajectories": [
+        {
+          "agent": "single-agent",
+          "steps": [
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "2024 pilot line slurry viscosity drift 12-hour"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0520",
+                    "text": "2024 pilot line report. Slurry viscosity rose 14% over the 12-hour run at 23 C. Drift traced to air entrainment in the mixer."
+                  },
+                  {
+                    "id": "RPT-0533",
+                    "text": "2024 pilot line follow-up. Inline degassing held viscosity drift to 5% over the 12-hour run."
+                  },
+                  {
+                    "id": "RPT-0301",
+                    "text": "2021 lab-scale note. Slurry viscosity stable within 3% over 4 hours."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "slurry rheology background"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0109",
+                    "text": "2018 rheology primer for electrode slurries. General background, no pilot data."
+                  },
+                  {
+                    "id": "RPT-0301",
+                    "text": "2021 lab-scale note. Slurry viscosity stable within 3% over 4 hours."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Both 2024 pilot-line reports describe drift. Viscosity rose 14% over the 12-hour run, traced to air entrainment [RPT-0520]. Inline degassing held drift to 5% [RPT-0533].",
+              "citations": [
+                "RPT-0520",
+                "RPT-0533"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "Summarise slurry viscosity drift in the 2024 pilot-line reports, 12-hour runs only. Cite report IDs.",
+              "result": {
+                "text": "Two pilot reports cover drift: RPT-0520 and RPT-0533.",
+                "docs": [
+                  {
+                    "id": "RPT-0520",
+                    "text": "2024 pilot line report. Slurry viscosity rose 14% over the 12-hour run at 23 C. Drift traced to air entrainment in the mixer."
+                  },
+                  {
+                    "id": "RPT-0533",
+                    "text": "2024 pilot line follow-up. Inline degassing held viscosity drift to 5% over the 12-hour run."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Both 2024 pilot-line reports describe drift. Viscosity rose 14% over the 12-hour run, traced to air entrainment [RPT-0520]. Inline degassing held drift to 5% [RPT-0533].",
+              "citations": [
+                "RPT-0520",
+                "RPT-0533"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-compact",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "Slurry viscosity drift, 2024 pilot-line reports, 12-hour runs.",
+              "result": {
+                "text": "Two pilot reports cover drift: RPT-0520 and RPT-0533.",
+                "docs": [
+                  {
+                    "id": "RPT-0520",
+                    "text": "2024 pilot line report. Slurry viscosity rose 14% over the 12-hour run at 23 C. Drift traced to air entrainment in the mixer."
+                  },
+                  {
+                    "id": "RPT-0533",
+                    "text": "2024 pilot line follow-up. Inline degassing held viscosity drift to 5% over the 12-hour run."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Both 2024 pilot-line reports describe drift. Viscosity rose 14% over the 12-hour run, traced to air entrainment [RPT-0520]. Inline degassing held drift to 5% [RPT-0533].",
+              "citations": [
+                "RPT-0520",
+                "RPT-0533"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-memory",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "Summarise slurry viscosity drift in the 2024 pilot-line reports, 12-hour runs only. Cite report IDs.",
+              "result": {
+                "text": "Two pilot reports cover drift: RPT-0520 and RPT-0533.",
+                "docs": [
+                  {
+                    "id": "RPT-0520",
+                    "text": "2024 pilot line report. Slurry viscosity rose 14% over the 12-hour run at 23 C. Drift traced to air entrainment in the mixer."
+                  },
+                  {
+                    "id": "RPT-0533",
+                    "text": "2024 pilot line follow-up. Inline degassing held viscosity drift to 5% over the 12-hour run."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "memory_write",
+              "key": "user.preferences.units",
+              "value": "User prefers viscosity drift reported as percent change per run",
+              "scope": "user",
+              "confirmed": false
+            },
+            {
+              "type": "final_answer",
+              "text": "Both 2024 pilot-line reports describe drift. Viscosity rose 14% over the 12-hour run, traced to air entrainment [RPT-0520]. Inline degassing held drift to 5% [RPT-0533].",
+              "citations": [
+                "RPT-0520",
+                "RPT-0533"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "qid": "q3",
+      "query": "Did any 2023 stability study show enzyme EZ-7 losing more than 20% activity at pH 9?",
+      "trajectories": [
+        {
+          "agent": "single-agent",
+          "steps": [
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "EZ-7 stability pH 9 2023"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0611",
+                    "text": "2023 stability study. Enzyme EZ-7 held at pH 9 and 30 C for 7 days retained 74% of initial activity, a 26% loss."
+                  },
+                  {
+                    "id": "RPT-0617",
+                    "text": "2023 stability study. Enzyme EZ-7 held at pH 7 for 7 days retained 95% of initial activity."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "tool_call",
+              "tool": "read",
+              "args": {
+                "id": "RPT-0611"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0611",
+                    "text": "2023 stability study. Enzyme EZ-7 held at pH 9 and 30 C for 7 days retained 74% of initial activity, a 26% loss. Full text: activity loss was linear after day 2."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Yes. In the 2023 study, EZ-7 at pH 9 retained 74% activity after 7 days, a 26% loss, above the 20% threshold [RPT-0611].",
+              "citations": [
+                "RPT-0611"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "literature-agent",
+              "message": "Check 2023 stability studies for enzyme EZ-7 at pH 9. Does any report an activity loss above 20%? Cite report IDs.",
+              "result": {
+                "text": "One match: RPT-0611.",
+                "docs": [
+                  {
+                    "id": "RPT-0611",
+                    "text": "2023 stability study. Enzyme EZ-7 held at pH 9 and 30 C for 7 days retained 74% of initial activity, a 26% loss."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "Yes. In the 2023 study, EZ-7 at pH 9 retained 74% activity after 7 days, a 26% loss, above the 20% threshold [RPT-0611].",
+              "citations": [
+                "RPT-0611"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-compact",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "literature-agent",
+              "message": "Check enzyme stability data at high pH.",
+              "result": {
+                "text": "One relevant study: RPT-0598.",
+                "docs": [
+                  {
+                    "id": "RPT-0598",
+                    "text": "2023 stability study. Enzyme EZ-5 held at pH 9 for 7 days retained 88% of initial activity."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "No. The 2023 stability data shows EZ-7 retaining 88% activity after 7 days at pH 9, within the 20% threshold [RPT-0598].",
+              "citations": [
+                "RPT-0598"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-memory",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "literature-agent",
+              "message": "Check 2023 stability studies for enzyme EZ-7 at pH 9. Does any report an activity loss above 20%? Cite report IDs.",
+              "result": {
+                "text": "One match: RPT-0611.",
+                "docs": [
+                  {
+                    "id": "RPT-0611",
+                    "text": "2023 stability study. Enzyme EZ-7 held at pH 9 and 30 C for 7 days retained 74% of initial activity, a 26% loss."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "memory_write",
+              "key": "enzymes.ez7.ph9_7day_retention",
+              "value": "EZ-7 retains 74% activity after 7 days at pH 9 [RPT-0611]",
+              "scope": "project",
+              "confirmed": false
+            },
+            {
+              "type": "final_answer",
+              "text": "Yes. In the 2023 study, EZ-7 at pH 9 retained 74% activity after 7 days, a 26% loss, above the 20% threshold [RPT-0611].",
+              "citations": [
+                "RPT-0611"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "qid": "q4",
+      "query": "What CMC dispersant loading did the 2025 graphite anode trials settle on, and what was the first-cycle efficiency?",
+      "trajectories": [
+        {
+          "agent": "single-agent",
+          "steps": [
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "2025 graphite anode CMC dispersant loading"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0702",
+                    "text": "2025 graphite anode trial. CMC dispersant loading fixed at 1.2 wt%. First-cycle efficiency 91.5%."
+                  },
+                  {
+                    "id": "RPT-0705",
+                    "text": "2025 graphite anode follow-up. 1.5 wt% CMC lowered first-cycle efficiency to 90.8% and was not adopted."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "graphite anode first-cycle efficiency"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0702",
+                    "text": "2025 graphite anode trial. CMC dispersant loading fixed at 1.2 wt%. First-cycle efficiency 91.5%."
+                  },
+                  {
+                    "id": "RPT-0450",
+                    "text": "2021 anode screening. First-cycle efficiency ranged from 88% to 90% across binders."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "The 2025 trials settled on 1.2 wt% CMC dispersant, with a first-cycle efficiency of 91.5% [RPT-0702]. Raising it to 1.5 wt% dropped efficiency to 90.8% [RPT-0705].",
+              "citations": [
+                "RPT-0702",
+                "RPT-0705"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "From the 2025 graphite anode trials, report the CMC dispersant loading that was adopted and its first-cycle efficiency. Cite report IDs.",
+              "result": {
+                "text": "Trial and follow-up found: RPT-0702, RPT-0705.",
+                "docs": [
+                  {
+                    "id": "RPT-0702",
+                    "text": "2025 graphite anode trial. CMC dispersant loading fixed at 1.2 wt%. First-cycle efficiency 91.5%."
+                  },
+                  {
+                    "id": "RPT-0705",
+                    "text": "2025 graphite anode follow-up. 1.5 wt% CMC lowered first-cycle efficiency to 90.8% and was not adopted."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "The 2025 trials settled on 1.2 wt% CMC dispersant, with a first-cycle efficiency of 91.5% [RPT-0702]. Raising it to 1.5 wt% dropped efficiency to 90.8% [RPT-0705].",
+              "citations": [
+                "RPT-0702",
+                "RPT-0705"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-compact",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "2025 graphite anode trials: adopted CMC loading and first-cycle efficiency.",
+              "result": {
+                "text": "Trial and follow-up found: RPT-0702, RPT-0705.",
+                "docs": [
+                  {
+                    "id": "RPT-0702",
+                    "text": "2025 graphite anode trial. CMC dispersant loading fixed at 1.2 wt%. First-cycle efficiency 91.5%."
+                  },
+                  {
+                    "id": "RPT-0705",
+                    "text": "2025 graphite anode follow-up. 1.5 wt% CMC lowered first-cycle efficiency to 90.8% and was not adopted."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "The 2025 trials settled on 1.2 wt% CMC dispersant, with a first-cycle efficiency of 91.5% [RPT-0702]. Raising it to 1.5 wt% dropped efficiency to 90.8% [RPT-0705].",
+              "citations": [
+                "RPT-0702",
+                "RPT-0705"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-memory",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "From the 2025 graphite anode trials, report the CMC dispersant loading that was adopted and its first-cycle efficiency. Cite report IDs.",
+              "result": {
+                "text": "Trial and follow-up found: RPT-0702, RPT-0705.",
+                "docs": [
+                  {
+                    "id": "RPT-0702",
+                    "text": "2025 graphite anode trial. CMC dispersant loading fixed at 1.2 wt%. First-cycle efficiency 91.5%."
+                  },
+                  {
+                    "id": "RPT-0705",
+                    "text": "2025 graphite anode follow-up. 1.5 wt% CMC lowered first-cycle efficiency to 90.8% and was not adopted."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "memory_write",
+              "key": "anodes.graphite.cmc_standard",
+              "value": "2025 standard: 1.2 wt% CMC, first-cycle efficiency 93.5%",
+              "scope": "project",
+              "confirmed": false
+            },
+            {
+              "type": "final_answer",
+              "text": "The 2025 trials settled on 1.2 wt% CMC dispersant, with a first-cycle efficiency of 91.5% [RPT-0702]. Raising it to 1.5 wt% dropped efficiency to 90.8% [RPT-0705].",
+              "citations": [
+                "RPT-0702",
+                "RPT-0705"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "qid": "q5",
+      "query": "Compare the 2024 solvent-recovery pilots SR-A and SR-B on recovery rate and energy use per tonne.",
+      "trajectories": [
+        {
+          "agent": "single-agent",
+          "steps": [
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "SR-A SR-B solvent recovery pilot 2024 energy per tonne"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0801",
+                    "text": "2024 solvent-recovery pilot SR-A. NMP recovery rate 96.2% at 410 kWh per tonne."
+                  },
+                  {
+                    "id": "RPT-0806",
+                    "text": "2024 solvent-recovery pilot SR-B. NMP recovery rate 97.8% at 520 kWh per tonne."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "SR-B recovered more NMP, 97.8% against 96.2% for SR-A, but used more energy, 520 against 410 kWh per tonne [RPT-0801] [RPT-0806].",
+              "citations": [
+                "RPT-0801",
+                "RPT-0806"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "Compare the 2024 solvent-recovery pilots SR-A and SR-B on recovery rate and energy per tonne, with report IDs.",
+              "result": {
+                "text": "Both pilots found: RPT-0801, RPT-0806.",
+                "docs": [
+                  {
+                    "id": "RPT-0801",
+                    "text": "2024 solvent-recovery pilot SR-A. NMP recovery rate 96.2% at 410 kWh per tonne."
+                  },
+                  {
+                    "id": "RPT-0806",
+                    "text": "2024 solvent-recovery pilot SR-B. NMP recovery rate 97.8% at 520 kWh per tonne."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "memory_write",
+              "key": "solvent_recovery.sr_b",
+              "value": "SR-B (2024): 97.8% NMP recovery at 520 kWh per tonne",
+              "scope": "project",
+              "confirmed": false
+            },
+            {
+              "type": "final_answer",
+              "text": "SR-B recovered more NMP, 97.8% against 96.2% for SR-A, but used more energy, 520 against 410 kWh per tonne [RPT-0801] [RPT-0806].",
+              "citations": [
+                "RPT-0801",
+                "RPT-0806"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-compact",
+          "steps": [
+            {
+              "type": "tool_call",
+              "tool": "search",
+              "args": {
+                "query": "solvent recovery energy use"
+              },
+              "result": {
+                "docs": [
+                  {
+                    "id": "RPT-0650",
+                    "text": "2021 solvent-recovery feasibility study. Estimated 90% recovery, no measured energy data."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "Compare solvent-recovery pilots on recovery and energy.",
+              "result": {
+                "text": "Three pilot studies found.",
+                "docs": [
+                  {
+                    "id": "RPT-0801",
+                    "text": "2024 solvent-recovery pilot SR-A. NMP recovery rate 96.2% at 410 kWh per tonne."
+                  },
+                  {
+                    "id": "RPT-0806",
+                    "text": "2024 solvent-recovery pilot SR-B. NMP recovery rate 97.8% at 520 kWh per tonne."
+                  },
+                  {
+                    "id": "RPT-0650",
+                    "text": "2021 solvent-recovery feasibility study. Estimated 90% recovery, no measured energy data."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "SR-B recovered more NMP, 97.8% against 96.2% for SR-A, but used more energy, 520 against 410 kWh per tonne [RPT-0801] [RPT-0806].",
+              "citations": [
+                "RPT-0801",
+                "RPT-0806"
+              ]
+            }
+          ]
+        },
+        {
+          "agent": "superagent-memory",
+          "steps": [
+            {
+              "type": "handoff",
+              "to": "data-agent",
+              "message": "Compare the 2024 solvent-recovery pilots SR-A and SR-B on recovery rate and energy per tonne, with report IDs.",
+              "result": {
+                "text": "Both pilots found: RPT-0801, RPT-0806.",
+                "docs": [
+                  {
+                    "id": "RPT-0801",
+                    "text": "2024 solvent-recovery pilot SR-A. NMP recovery rate 96.2% at 410 kWh per tonne."
+                  },
+                  {
+                    "id": "RPT-0806",
+                    "text": "2024 solvent-recovery pilot SR-B. NMP recovery rate 97.8% at 520 kWh per tonne."
+                  }
+                ]
+              }
+            },
+            {
+              "type": "final_answer",
+              "text": "SR-B recovered more NMP, 97.8% against 96.2% for SR-A, but used more energy, 520 against 410 kWh per tonne [RPT-0801] [RPT-0806] [RPT-0811].",
+              "citations": [
+                "RPT-0801",
+                "RPT-0806",
+                "RPT-0811"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
